@@ -18,7 +18,8 @@ module.exports = function koaSendServe (dir, pathname) {
     throw new TypeError('koa-send-serve: expect `dir` to be string or buffer')
   }
   if (typeOf(pathname) === 'string') {
-    pathname = new RegExp(pathname)
+    pathname = pathname[0] === '/' ? pathname : '/' + pathname
+    pathname = new RegExp('^' + pathname)
   }
   if (typeOf(pathname) !== 'regexp') {
     throw new TypeError('koa-send-serve: expect `pathname` to be string or regex')
