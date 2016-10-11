@@ -1,0 +1,66 @@
+{
+  "name": "koa-better-serve",
+  "version": "0.1.0",
+  "description": "Get contents of the folder in streaming mode with support for plugins. No recursion. No globs - possible through plugin. It is like and follows `fs.createReadStream` signature and semantics",
+  "repository": "tunnckoCore/koa-better-serve",
+  "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
+  "precommit.silent": true,
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "standard --verbose",
+    "pretest": "npm run lint",
+    "test": "npm run coverage",
+    "posttest": "npm run lint:coverage",
+    "coverage": "nyc node test.js",
+    "lint:coverage": "nyc check-coverage --lines 100 --branches 90 --statements 100 --functions 100",
+    "report-coverage": "nyc report --reporter=text-lcov | coveralls",
+    "prerelease": "npm test",
+    "release": "standard-version --sign --no-verify",
+    "precommit": "git add --all",
+    "commit": "git-cz"
+  },
+  "dependencies": {
+    "kind-of": "^3.0.4",
+    "koa-send": "^3.2.0"
+  },
+  "devDependencies": {
+    "commitizen": "^2.8.6",
+    "coveralls": "^2.11.12",
+    "cz-conventional-changelog": "^1.2.0",
+    "mukla": "^0.4.1",
+    "nyc": "^8.1.0",
+    "pre-commit": "^1.1.3",
+    "standard": "^8.0.0",
+    "standard-version": "^2.4.0"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "verb": {
+    "run": true,
+    "toc": false,
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "lint": {
+      "reflinks": true
+    },
+    "related": {
+      "list": []
+    },
+    "reflinks": [
+      "micromatch",
+      "through2",
+      "use",
+      "vinyl"
+    ]
+  }
+}
