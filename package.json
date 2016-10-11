@@ -1,7 +1,7 @@
 {
   "name": "koa-better-serve",
   "version": "0.1.0",
-  "description": "Get contents of the folder in streaming mode with support for plugins. No recursion. No globs - possible through plugin. It is like and follows `fs.createReadStream` signature and semantics",
+  "description": "Small, simple and correct serving of files, using [koa-send][] - nothing more.",
   "repository": "tunnckoCore/koa-better-serve",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "precommit.silent": true,
