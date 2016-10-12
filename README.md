@@ -17,13 +17,14 @@ npm i koa-better-serve --save
 const koaBetterServe = require('koa-better-serve')
 ```
 
-### [koaBetterServe](index.js#L37)
+### [koaBetterServe](index.js#L38)
 > Serving `dir` of files and folders, when request url (`ctx.url`) match to `pathname`. All behind the scenes is just using [koa-send][]. **Hint:** use [koa-convert][] to use it for [koa][] v1.
 
 **Params**
 
 * `<dir>` **{String|Buffer}**: folder to serve    
 * `[pathname]` **{String|RegExp}**: path to match, can be regex    
+* `[opts]` **{Object}**: optional, passed directly to [koa-send][]    
 * `returns` **{Function}**: plugin which returns `Promise` when called  
 
 **Example**

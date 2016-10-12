@@ -30,6 +30,7 @@ var typeOf = require('kind-of')
  *
  * @param  {String|Buffer} `<dir>` folder to serve
  * @param  {String|RegExp} `[pathname]` path to match, can be regex
+ * @param  {Object} `[opts]` optional, passed directly to [koa-send][]
  * @return {Function} [koa][] plugin which returns `Promise` when called
  * @api public
  */
