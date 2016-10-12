@@ -39,7 +39,23 @@
   "files": [
     "index.js"
   ],
-  "keywords": [],
+  "keywords": [
+    "content",
+    "contents",
+    "file",
+    "files",
+    "images",
+    "index",
+    "koa",
+    "koa-send",
+    "koajs",
+    "middleware",
+    "send",
+    "serve",
+    "serving",
+    "static",
+    "upload"
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
