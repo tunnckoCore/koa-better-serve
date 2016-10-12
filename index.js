@@ -11,7 +11,30 @@ var path = require('path')
 var send = require('koa-send')
 var typeOf = require('kind-of')
 
-module.exports = function koaSendServe (dir, pathname, opts) {
+/**
+ * > Serving `dir` of files and folders, when request
+ * url (`ctx.url`) match to `pathname`. All behind
+ * the scenes is just using [koa-send][].
+ * **Hint:** use [koa-convert][] to use it for [koa][] v1.
+ *
+ * **Example**
+ *
+ * ```js
+ * const serve = require('koa-better-serve')
+ * const Koa = require('koa')
+ * const app = new Koa()
+ *
+ * app.use(serve('./uploads/images', '/images'))
+ * app.listen(4290)
+ * ```
+ *
+ * @param  {String|Buffer} `<dir>` folder to serve
+ * @param  {String|RegExp} `[pathname]` path to match, can be regex
+ * @return {Function} [koa][] plugin which returns `Promise` when called
+ * @api public
+ */
+
+module.exports = function koaBetterServe (dir, pathname, opts) {
   dir = typeOf(dir) === 'buffer' ? dir.toString() : dir
   opts = typeOf(pathname) === 'object' ? pathname : opts
   opts = typeOf(opts) === 'object' ? opts : {}

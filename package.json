@@ -62,7 +62,10 @@
       "micromatch",
       "through2",
       "use",
-      "vinyl"
+      "vinyl",
+      "koa",
+      "koa-convert",
+      "koa-send"
     ]
   }
 }

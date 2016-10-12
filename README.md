@@ -17,6 +17,26 @@ npm i koa-better-serve --save
 const koaBetterServe = require('koa-better-serve')
 ```
 
+### [koaBetterServe](index.js#L37)
+> Serving `dir` of files and folders, when request url (`ctx.url`) match to `pathname`. All behind the scenes is just using [koa-send][]. **Hint:** use [koa-convert][] to use it for [koa][] v1.
+
+**Params**
+
+* `<dir>` **{String|Buffer}**: folder to serve    
+* `[pathname]` **{String|RegExp}**: path to match, can be regex    
+* `returns` **{Function}**: plugin which returns `Promise` when called  
+
+**Example**
+
+```js
+const serve = require('koa-better-serve')
+const Koa = require('koa')
+const app = new Koa()
+
+app.use(serve('./uploads/images', '/images'))
+app.listen(4290)
+```
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/tunnckoCore/koa-better-serve/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
@@ -25,6 +45,9 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
 
+[koa-convert]: https://github.com/gyson/koa-convert
+[koa-send]: https://github.com/koajs/send
+[koa]: https://github.com/koajs/koa
 [micromatch]: https://github.com/jonschlinkert/micromatch
 [through2]: https://github.com/rvagg/through2
 [use]: https://github.com/jonschlinkert/use
@@ -75,4 +98,3 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [new-message-url]: https://github.com/tunnckoCore/ama
 [new-message-img]: https://img.shields.io/badge/ask%20me-anything-green.svg
 
-[koa-send]: https://github.com/koajs/send
