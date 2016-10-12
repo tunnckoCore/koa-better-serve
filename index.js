@@ -7,17 +7,23 @@
 
 'use strict'
 
+var path = require('path')
 var send = require('koa-send')
 var typeOf = require('kind-of')
 
-module.exports = function koaSendServe (dir, pathname) {
+module.exports = function koaSendServe (dir, pathname, opts) {
   dir = typeOf(dir) === 'buffer' ? dir.toString() : dir
+  opts = typeOf(pathname) === 'object' ? pathname : opts
+  opts = typeOf(opts) === 'object' ? opts : {}
+  opts.root = dir
+  pathname = typeOf(pathname) === 'object' ? false : pathname
   pathname = pathname || '/'
 
   if (typeOf(dir) !== 'string') {
     throw new TypeError('koa-send-serve: expect `dir` to be string or buffer')
   }
   if (typeOf(pathname) === 'string') {
+    pathname = pathname[0] === '^' ? pathname.slice(1) : pathname
     pathname = pathname[0] === '/' ? pathname : '/' + pathname
     pathname = new RegExp('^' + pathname)
   }
@@ -28,7 +34,9 @@ module.exports = function koaSendServe (dir, pathname) {
   return function (ctx, next) {
     return pathname.test(ctx.url)
       ? next().then(function () {
-        return send(ctx, ctx.path)
+        var fp = ctx.path.replace(pathname, '')
+        var fpath = path.relative(dir, path.resolve(dir, fp))
+        return send(ctx, fpath, opts)
       })
       : next()
   }
