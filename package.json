@@ -1,6 +1,6 @@
 {
   "name": "koa-better-serve",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small, simple and correct serving of files, using [koa-send][] - nothing more.",
   "repository": "tunnckoCore/koa-better-serve",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
