@@ -83,3 +83,13 @@ test('should serve `koa-send`s package.json when `/package.json` request', funct
     .expect(/koa-send/)
     .expect(200, done)
 })
+
+test('should serve `koa-send`s package.json when `/package.json` request with prefix', function (done) {
+  var app = new Koa()
+  app.use(serve('./node_modules/koa-send', '/koa-send'))
+
+  request(app.callback())
+    .get('/koa-send/package.json')
+    .expect(/koa-send/)
+    .expect(200, done)
+})

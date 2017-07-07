@@ -59,7 +59,7 @@ module.exports = function koaBetterServe (dir, pathname, opts) {
     return pathname.test(ctx.url)
       ? next().then(function () {
         var fp = ctx.path.replace(pathname, '')
-        var fpath = path.relative(dir, path.resolve(dir, fp))
+        var fpath = path.relative(dir, path.join(dir, fp))
         return send(ctx, fpath, opts)
       })
       : next()
