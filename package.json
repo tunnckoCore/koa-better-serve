@@ -1,8 +1,9 @@
 {
   "name": "koa-better-serve",
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantic-release",
   "description": "Small, simple and correct serving of files, using [koa-send][] - nothing more",
   "repository": "tunnckoCore/koa-better-serve",
+  "homepage": "https://github.com/tunnckoCore/koa-better-serve",
   "author": "Charlike Mike Reagent <@tunnckoCore> (https://i.am.charlike.online)",
   "main": "./index.js",
   "license": "MIT",
