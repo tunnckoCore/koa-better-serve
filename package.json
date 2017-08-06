@@ -42,8 +42,7 @@
     "nyc": "11.1.0",
     "semantic-release": "^6.3.6",
     "simple-commit-message": "3.3.1",
-    "supertest": "3.0.0",
-    "validate-commit-msg": "2.14.0"
+    "supertest": "3.0.0"
   },
   "nyc": {
     "check-coverage": true,
@@ -57,8 +56,13 @@
     "pinVersions": true,
     "rebaseStalePrs": true,
     "semanticCommits": true,
-    "labels": ["renovate", "deps"],
-    "assignees": ["charlike"],
+    "labels": [
+      "renovate",
+      "deps"
+    ],
+    "assignees": [
+      "charlike"
+    ],
     "automerge": "any",
     "automergeType": "branch-push",
     "prCreation": "not-pending",
@@ -74,7 +78,9 @@
     ],
     "packageRules": [
       {
-        "packageNames": ["semantic-release"],
+        "packageNames": [
+          "semantic-release"
+        ],
         "pinVersions": false
       }
     ]
