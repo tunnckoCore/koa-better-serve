@@ -3,7 +3,7 @@
   "version": "0.0.0-development",
   "description": "Small, simple and correct serving of files, using [koa-send][] - nothing more",
   "repository": "tunnckoCore/koa-better-serve",
-  "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
+  "author": "Charlike Mike Reagent <@tunnckoCore> (https://i.am.charlike.online)",
   "main": "./index.js",
   "license": "MIT",
   "scripts": {
@@ -12,7 +12,6 @@
     "test": "nyc --reporter lcov node test.js && nyc report",
     "precommit": "npm run lint && npm test && git add --all",
     "commit": "simple-commit-message",
-    "commitmsg": "validate-commit-msg",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
