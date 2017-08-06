@@ -12,6 +12,7 @@
     "test": "nyc --reporter lcov node test.js && nyc report",
     "precommit": "npm run lint && npm test && git add --all",
     "commit": "simple-commit-message",
+    "postcommit": "git push",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
