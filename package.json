@@ -1,93 +1,87 @@
 {
   "name": "koa-better-serve",
-  "version": "1.0.1",
-  "description": "Small, simple and correct serving of files, using [koa-send][] - nothing more.",
+  "version": "0.0.0-development",
+  "description": "Small, simple and correct serving of files, using [koa-send][] - nothing more",
   "repository": "tunnckoCore/koa-better-serve",
-  "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
-  "precommit.silent": true,
-  "main": "index.js",
+  "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
+  "main": "./index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "standard --verbose",
-    "pretest": "npm run lint",
-    "test": "npm run coverage",
-    "posttest": "npm run lint:coverage",
-    "coverage": "nyc node test.js",
-    "lint:coverage": "nyc check-coverage --lines 100 --branches 90 --statements 100 --functions 100",
-    "report-coverage": "nyc report --reporter=text-lcov | coveralls",
-    "prerelease": "npm test",
-    "release": "standard-version --sign --no-verify",
-    "precommit": "git add --all",
-    "commit": "git-cz"
+    "lint": "eslint . --fix --format codeframe",
+    "dev": "chokidar '*.js' -c 'npm test'",
+    "test": "nyc --reporter lcov node test.js && nyc report",
+    "precommit": "npm run lint && npm test && git add --all",
+    "commit": "simple-commit-message",
+    "commitmsg": "validate-commit-msg",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "engines": {
+    "node": ">=7",
+    "npm": ">=5"
   },
   "dependencies": {
-    "kind-of": "5.0.0",
-    "koa-send": "3.3.0"
+    "kind-of": "5.0.2",
+    "koa-send": "4.1.0"
   },
   "devDependencies": {
-    "commitizen": "^2.8.6",
-    "coveralls": "^2.11.12",
-    "cz-conventional-changelog": "^1.2.0",
-    "koa": "^2.0.0",
-    "mukla": "^0.4.1",
-    "nyc": "^8.1.0",
-    "pre-commit": "^1.1.3",
-    "standard": "^8.0.0",
-    "standard-version": "^2.4.0",
-    "supertest": "^2.0.0"
+    "chokidar-cli": "1.2.0",
+    "eslint": "4.4.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-config-standard-jsx": "4.0.2",
+    "eslint-config-standard-react": "5.0.0",
+    "eslint-plugin-fp": "2.3.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsdoc": "3.1.2",
+    "eslint-plugin-node": "5.1.1",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-react": "7.1.0",
+    "eslint-plugin-standard": "3.0.1",
+    "github-post-release": "1.13.0",
+    "husky": "0.14.3",
+    "koa": "2.3.0",
+    "mukla": "0.4.9",
+    "nyc": "11.1.0",
+    "semantic-release": "^6.3.6",
+    "simple-commit-message": "3.3.1",
+    "supertest": "3.0.0",
+    "validate-commit-msg": "2.14.0"
   },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "content",
-    "contents",
-    "file",
-    "files",
-    "images",
-    "index",
-    "koa",
-    "koa-send",
-    "koajs",
-    "middleware",
-    "send",
-    "serve",
-    "serving",
-    "static",
-    "upload"
-  ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+  "nyc": {
+    "check-coverage": true,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "lines": 100
   },
-  "verb": {
-    "run": true,
-    "toc": false,
-    "layout": "empty",
-    "tasks": [
-      "readme"
+  "renovate": {
+    "enabled": true,
+    "pinVersions": true,
+    "rebaseStalePrs": true,
+    "semanticCommits": true,
+    "labels": ["renovate", "deps"],
+    "assignees": ["charlike"],
+    "automerge": "any",
+    "automergeType": "branch-push",
+    "prCreation": "not-pending",
+    "depTypes": [
+      {
+        "depType": "dependencies",
+        "semanticPrefix": "fix(renovate/deps): "
+      },
+      {
+        "depType": "devDependencies",
+        "semanticPrefix": "chore(renovate/devDeps): "
+      }
     ],
-    "related": {
-      "list": [
-        "koa-better-ratelimit",
-        "koa-better-body",
-        "koa-ip-filter",
-        "koa-bel",
-        "nanomatch"
-      ]
-    },
-    "reflinks": [
-      "micromatch",
-      "through2",
-      "use",
-      "vinyl",
-      "koa",
-      "koa-convert",
-      "koa-send"
-    ],
-    "lint": {
-      "reflinks": true
-    }
+    "packageRules": [
+      {
+        "packageNames": ["semantic-release"],
+        "pinVersions": false
+      }
+    ]
+  },
+  "release": {
+    "analyzeCommits": "simple-commit-message",
+    "generateNotes": "github-post-release"
   }
 }

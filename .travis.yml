@@ -1,21 +1,27 @@
 sudo: false
 language: node_js
 
-node_js:
-  - "node"
-  - "6"
-  - "4"
-  - "0.12"
-  - "0.10"
-
-matrix:
-  fast_finish: true
-  allow_failures:
-    - node_js: "4"
-    - node_js: "0.12"
-    - node_js: "0.10"
+cache:
+  directories:
+    - node_modules
 
 notifications:
   email: false
 
-after_success: npm run report-coverage
+node_js:
+  - '8'
+  - '7'
+
+before_install:
+  - npm install --global npm@latest
+
+before_script:
+  - npm prune
+
+after_success:
+  - npm run semantic-release
+  - bash <(curl -s https://codecov.io/bash)
+
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
