@@ -1,15 +1,12 @@
 /*!
  * koa-better-serve <https://github.com/tunnckoCore/koa-better-serve>
  *
- * Copyright (c) 2016 Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)
+ * Copyright (c) 2016-2017 Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)
  * Released under the MIT license.
  */
 
-'use strict'
-
-var path = require('path')
-var send = require('koa-send')
-var typeOf = require('kind-of')
+const send = require('koa-send')
+const kindOf = require('kind-of')
 
 /**
  * > Serving `dir` of files and folders, when request
@@ -28,40 +25,39 @@ var typeOf = require('kind-of')
  * app.listen(4290)
  * ```
  *
- * @param  {String|Buffer} `<dir>` folder to serve
- * @param  {String|RegExp} `[pathname]` path to match, can be regex
- * @param  {Object} `[opts]` optional, passed directly to [koa-send][]
+ * @param  {String|Buffer} root folder to serve
+ * @param  {String|RegExp} pathname path to match, can be regex
+ * @param  {Object} options optional, passed directly to [koa-send][]
  * @return {Function} [koa][] plugin which returns `Promise` when called
  * @api public
  */
+module.exports = function koaBetterServe (root, pathname, options) {
+  if (kindOf(root) !== 'string') {
+    throw new TypeError('koa-better-serve: expect `root` to be string')
+  }
 
-module.exports = function koaBetterServe (dir, pathname, opts) {
-  dir = typeOf(dir) === 'buffer' ? dir.toString() : dir
-  opts = typeOf(pathname) === 'object' ? pathname : opts
-  opts = typeOf(opts) === 'object' ? opts : {}
-  opts.root = dir
-  pathname = typeOf(pathname) === 'object' ? false : pathname
+  if (kindOf(pathname) === 'object') {
+    options = pathname
+    pathname = '/'
+  }
+
+  options = kindOf(options) === 'object' ? options : null
+  options = Object.assign({ root }, options)
   pathname = pathname || '/'
 
-  if (typeOf(dir) !== 'string') {
-    throw new TypeError('koa-send-serve: expect `dir` to be string or buffer')
-  }
-  if (typeOf(pathname) === 'string') {
-    pathname = pathname[0] === '^' ? pathname.slice(1) : pathname
-    pathname = pathname[0] === '/' ? pathname : '/' + pathname
-    pathname = new RegExp('^' + pathname)
-  }
-  if (typeOf(pathname) !== 'regexp') {
-    throw new TypeError('koa-send-serve: expect `pathname` to be string or regex')
+  if (kindOf(pathname) !== 'string') {
+    throw new TypeError('koa-better-serve: expect `pathname` to be string')
   }
 
-  return function (ctx, next) {
-    return pathname.test(ctx.url)
-      ? next().then(function () {
-        var fp = ctx.path.replace(pathname, '')
-        var fpath = path.relative(dir, path.join(dir, fp))
-        return send(ctx, fpath, opts)
-      })
-      : next()
+  return (ctx, next) => {
+    const filepath = ctx.path.replace(pathname, '')
+
+    return send(ctx, filepath, options).catch((er) => {
+      /* istanbul ignore else */
+      if (er.code === 'ENOENT' && er.status === 404) {
+        ctx.status = 404
+        ctx.body = 'Not Found'
+      }
+    })
   }
 }

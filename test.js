@@ -1,95 +1,80 @@
 /*!
  * koa-better-serve <https://github.com/tunnckoCore/koa-better-serve>
  *
- * Copyright (c) 2016 Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)
+ * Copyright (c) 2016-2017 Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)
  * Released under the MIT license.
  */
 
-/* jshint asi:true */
+const Koa = require('koa')
+const test = require('mukla')
+const request = require('supertest')
+const serve = require('./index')
 
-'use strict'
-
-var Koa = require('koa')
-var test = require('mukla')
-var serve = require('./index')
-var request = require('supertest')
-
-test('should throw TypeError if `dir` not a string or buffer', function (done) {
+test('throw error if `root` not a string', () => {
   function fixture () {
     serve(123)
   }
+
   test.throws(fixture, /TypeError/)
-  test.throws(fixture, /expect `dir` to be string or buffer/)
-  done()
+  test.throws(fixture, /expect `root` to be string/)
 })
 
-test('should throw TypeError if `pathname` not a string or regexp', function (done) {
+test('throw error if `pathname` not a string or `options` object', () => {
   function fixture () {
-    serve('./foobar', 123)
+    serve('./foo', 123)
   }
+
   test.throws(fixture, /TypeError/)
-  test.throws(fixture, /expect `pathname` to be string or regex/)
-  done()
+  test.throws(fixture, /expect `pathname` to be string/)
 })
 
-test('should be able to accept buffer as `dir`', function (done) {
-  var app = new Koa()
-  app.use(serve(new Buffer('./'), '/'))
+test('accept `options` as second parameter', () => {
+  let app = new Koa()
+  app.use(
+    serve('./', {
+      hidden: true,
+    })
+  )
 
-  request(app.callback())
-    .get('/LICENSE')
-    .expect(200, /Charlike Mike Reagent/)
-    .expect(/MIT/)
-    .end(done)
-})
-
-test('should be able to pass `opts` as 2nd argument', function (done) {
-  var app = new Koa()
-  app.use(serve('./', {
-    hidden: true
-  }))
-
-  request(app.callback())
+  return request(app.callback())
     .get('/.travis.yml')
     .expect(/language: node_js/)
-    .expect(200, done)
+    .expect(200)
 })
 
-test('should try to serve LICENSE file from not existing dir', function (done) {
-  var app = new Koa()
+test('response 404 when `root` not exists', () => {
+  let app = new Koa()
   app.use(serve('./not-exists', '/'))
 
-  request(app.callback())
-    .get('/LICENSE')
-    .expect(404, /Not Found/)
-    .end(done)
+  return request(app.callback()).get('/LICENSE').expect(404, /Not Found/)
 })
 
-test('should serve `package.json` from repo root when `/pkg/package.json` url', function (done) {
-  var server = new Koa()
+test('serve file from root when pathname `/pkg/`', () => {
+  let server = new Koa()
+
   // both `/pkg/` and `pkg/` works
-  request(server.use(serve('./', 'pkg/')).callback())
+  return request(server.use(serve('./', 'pkg/')).callback())
     .get('/pkg/package.json')
-    .expect(/koa-better-serve/)
-    .expect(200, done)
+    .expect(/name": "koa-better-serve"/)
+    .expect(200)
 })
 
-test('should serve `koa-send`s package.json when `/package.json` request', function (done) {
-  var app = new Koa()
-  app.use(serve('./node_modules/koa-send', '/'))
+test('serve package.json from nested root', () => {
+  let app = new Koa()
+  app.use(serve('./node_modules/koa-send'))
 
-  request(app.callback())
+  return request(app.callback())
     .get('/package.json')
-    .expect(/koa-send/)
-    .expect(200, done)
+    .expect(/name": "koa-send"/)
+    .expect(200)
 })
 
-test('should serve `koa-send`s package.json when `/package.json` request with prefix', function (done) {
-  var app = new Koa()
-  app.use(serve('./node_modules/koa-send', '/koa-send'))
+test('serve file when request has prefix', () => {
+  let app = new Koa()
+  app.use(serve('./node_modules/supertest', '/some/foo/bar'))
 
-  request(app.callback())
-    .get('/koa-send/package.json')
-    .expect(/koa-send/)
-    .expect(200, done)
+  return request(app.callback())
+    .get('/some/foo/bar/package.json')
+    .expect(/supertest/)
+    .expect(200)
 })
