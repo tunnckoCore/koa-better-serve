@@ -58,6 +58,7 @@
     "pinVersions": true,
     "rebaseStalePrs": true,
     "semanticCommits": true,
+    "unpublishSafe": false,
     "labels": [
       "deps",
       "renovate"
@@ -66,7 +67,7 @@
       "charlike"
     ],
     "automerge": "any",
-    "automergeType": "branch-push",
+    "automergeType": "pr",
     "prCreation": "not-pending",
     "depTypes": [
       {
