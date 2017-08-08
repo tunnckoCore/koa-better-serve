@@ -20,6 +20,9 @@
     "node": ">=7",
     "npm": ">=5"
   },
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
     "kind-of": "5.0.2",
     "koa-send": "4.1.0"
@@ -46,6 +49,23 @@
     "simple-commit-message": "3.3.1",
     "supertest": "3.0.0"
   },
+  "keywords": [
+    "content",
+    "contents",
+    "file",
+    "files",
+    "images",
+    "index",
+    "koa",
+    "koa-send",
+    "koajs",
+    "middleware",
+    "send",
+    "serve",
+    "serving",
+    "static",
+    "upload"
+  ],
   "nyc": {
     "check-coverage": true,
     "statements": 100,
