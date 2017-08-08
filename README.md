@@ -12,10 +12,11 @@ You might want to use this utility to create plugins for [minibase]() or [base](
 [![Linux Build][travis-img]][travis-url] 
 [![windows Build][appveyor-img]][appveyor-url] 
 [![Code Coverage][codecov-img]][codecov-url] 
-[![Dependencies][dependencies-img]][dependencies-url] 
+[![Dependencies Status][dependencies-img]][dependencies-url] 
+[![Renovate App Status][renovate-img]][renovate-url] 
 
-If you have any _how-to_ kind of questions, please read the [Code of Conduct]() and feel free to **join the chat** room.  
-You may also read the [Contributing Guide](). There, beside _"How to contribute?"_, we describe everything **stated** by  the badges.
+If you have any _how-to_ kind of questions, please read [Code of Conduct](./CODE_OF_CONDUCT.md) and **join the chat** room or [open an issue](./issues/new).  
+You may also read the [Contributing Guide](./CONTRIBUTING.md). There, beside _"How to contribute?"_, we describe everything **_stated_** by  the badges.
 
 [![tunnckoCore support][gitterchat-img]][gitterchat-url] 
 [![Code Format Prettier][prettier-img]][prettier-url] 
@@ -68,8 +69,11 @@ TODO
 [codecov-url]: https://codecov.io/gh/tunnckoCore/koa-better-serve
 [codecov-img]: https://img.shields.io/codecov/c/github/tunnckoCore/koa-better-serve/master.svg
 
-[dependencies-url]: https://renovateapp.com
+[dependencies-url]: https://david-dm.org/tunnckoCore/dush-better-use
 [dependencies-img]: https://img.shields.io/david/tunnckoCore/koa-better-serve.svg
+
+[renovate-url]: https://renovateapp.com
+[renovate-img]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
 
 <!-- Second front of badges -->
 
@@ -85,7 +89,7 @@ TODO
 [nodesec-img]: https://img.shields.io/badge/nsp-no_known_vulns-35a9e0.svg -->
 
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
-[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-automatic--release-e10079.svg
+[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 
 [ccommits-url]: https://conventionalcommits.org/
 [ccommits-img]: https://img.shields.io/badge/conventional_commits-1.0.0-yellow.svg
