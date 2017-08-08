@@ -59,8 +59,8 @@
     "rebaseStalePrs": true,
     "semanticCommits": true,
     "labels": [
-      "renovate",
-      "deps"
+      "deps",
+      "renovate"
     ],
     "assignees": [
       "charlike"
@@ -86,6 +86,61 @@
         "pinVersions": false
       }
     ]
+  },
+  "verb": {
+    "run": true,
+    "toc": {
+      "render": true,
+      "method": "preWrite",
+      "maxdepth": 3
+    },
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "related": {
+      "list": [
+        "dush",
+        "koa-better-router",
+        "koa-better-body",
+        "koa-rest-router",
+        "koa-bel",
+        "micro"
+      ],
+      "highlight": "koa-better-router"
+    },
+    "reflinks": [
+      "always-done",
+      "async-done",
+      "base",
+      "browserify",
+      "charlike",
+      "charlike-cli",
+      "commitizen",
+      "dezalgo",
+      "dush-better-use",
+      "dush-methods",
+      "dush-no-chaining",
+      "dush-options",
+      "dush-promise",
+      "dush-router",
+      "dush-tap-report",
+      "hyperscript",
+      "koa-send",
+      "mitt",
+      "once",
+      "rollup",
+      "standard-version",
+      "verb",
+      "verb-generate-readme",
+      "webpack",
+      "koa",
+      "koa-convert",
+      "path-match"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   },
   "release": {
     "analyzeCommits": "simple-commit-message",
