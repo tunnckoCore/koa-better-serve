@@ -83,20 +83,22 @@
       "deps",
       "renovate"
     ],
-    "assignees": [
-      "charlike"
-    ],
-    "automerge": "any",
-    "automergeType": "pr",
     "prCreation": "not-pending",
     "depTypes": [
       {
         "depType": "dependencies",
-        "semanticPrefix": "fix(renovate/deps): "
+        "semanticPrefix": "fix(renovate/deps): ",
+        "automerge": "minor",
+        "automergeType": "pr",
+        "assignees": [
+          "charlike"
+        ]
       },
       {
         "depType": "devDependencies",
-        "semanticPrefix": "chore(renovate/devDeps): "
+        "semanticPrefix": "chore(renovate/devDeps): ",
+        "automerge": "any",
+        "automergeType": "branch-push"
       }
     ],
     "packageRules": [
@@ -104,6 +106,8 @@
         "packageNames": [
           "semantic-release"
         ],
+        "automerge": "minor",
+        "automergeType": "pr",
         "pinVersions": false
       }
     ]
