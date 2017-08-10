@@ -9,13 +9,14 @@
   "main": "./index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "chokidar '*.js' -c 'npm test'",
+    "renovate": "hela renovate",
     "lint": "hela lint -c .eslintrc.json",
     "test": "hela test node test.js",
     "precommit": "hela precommit",
     "commit": "hela commit",
     "postcommit": "git push",
-    "semantic-release": "hela release"
+    "semantic-release": "hela release",
+    "dev": "chokidar '*.js' -c 'npm test'"
   },
   "engines": {
     "node": ">=7",
@@ -32,7 +33,7 @@
     "chokidar-cli": "1.2.0",
     "eslint": "4.4.1",
     "eslint-config-standard-tunnckocore": "1.0.0",
-    "hela": "0.2.0",
+    "hela": "0.2.8",
     "husky": "0.14.3",
     "koa": "2.3.0",
     "supertest": "3.0.0"
@@ -60,45 +61,6 @@
     "functions": 100,
     "branches": 100,
     "lines": 100
-  },
-  "renovate": {
-    "enabled": true,
-    "pinVersions": true,
-    "rebaseStalePrs": true,
-    "semanticCommits": true,
-    "unpublishSafe": false,
-    "labels": [
-      "deps",
-      "renovate"
-    ],
-    "prCreation": "not-pending",
-    "depTypes": [
-      {
-        "depType": "dependencies",
-        "semanticPrefix": "fix(renovate/deps): ",
-        "automerge": "minor",
-        "automergeType": "pr",
-        "assignees": [
-          "charlike"
-        ]
-      },
-      {
-        "depType": "devDependencies",
-        "semanticPrefix": "chore(renovate/devDeps): ",
-        "automerge": "any",
-        "automergeType": "branch-push"
-      }
-    ],
-    "packageRules": [
-      {
-        "packageNames": [
-          "semantic-release"
-        ],
-        "automerge": "minor",
-        "automergeType": "pr",
-        "pinVersions": false
-      }
-    ]
   },
   "verb": {
     "run": true,
