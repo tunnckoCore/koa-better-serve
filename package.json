@@ -5,16 +5,17 @@
   "repository": "tunnckoCore/koa-better-serve",
   "homepage": "https://github.com/tunnckoCore/koa-better-serve",
   "author": "Charlike Mike Reagent <@tunnckoCore> (https://i.am.charlike.online)",
+  "nspId": "1efca2b5-9131-4e4e-9081-b911c996598e",
   "main": "./index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint . --fix --format codeframe",
     "dev": "chokidar '*.js' -c 'npm test'",
-    "test": "nyc --reporter lcov node test.js && nyc report",
-    "precommit": "npm run lint && npm test && git add --all",
-    "commit": "simple-commit-message",
+    "lint": "hela lint -c .eslintrc.json",
+    "test": "hela test node test.js",
+    "precommit": "hela precommit",
+    "commit": "hela commit",
     "postcommit": "git push",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "hela release"
   },
   "engines": {
     "node": ">=7",
@@ -30,23 +31,10 @@
   "devDependencies": {
     "chokidar-cli": "1.2.0",
     "eslint": "4.4.1",
-    "eslint-config-standard": "10.2.1",
-    "eslint-config-standard-jsx": "4.0.2",
-    "eslint-config-standard-react": "5.0.0",
-    "eslint-plugin-fp": "2.3.0",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsdoc": "3.1.2",
-    "eslint-plugin-node": "5.1.1",
-    "eslint-plugin-promise": "3.5.0",
-    "eslint-plugin-react": "7.2.0",
-    "eslint-plugin-standard": "3.0.1",
-    "github-post-release": "1.13.0",
+    "eslint-config-standard-tunnckocore": "1.0.0",
+    "hela": "0.2.0",
     "husky": "0.14.3",
     "koa": "2.3.0",
-    "mukla": "0.4.9",
-    "nyc": "11.1.0",
-    "semantic-release": "^6.3.6",
-    "simple-commit-message": "3.3.1",
     "supertest": "3.0.0"
   },
   "keywords": [
@@ -168,7 +156,6 @@
     }
   },
   "release": {
-    "analyzeCommits": "simple-commit-message",
-    "generateNotes": "github-post-release"
+    "analyzeCommits": "simple-commit-message"
   }
 }

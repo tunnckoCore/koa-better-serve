@@ -6,7 +6,7 @@
  */
 
 const Koa = require('koa')
-const test = require('mukla')
+const test = require('mukla') // eslint-disable-line
 const request = require('supertest')
 const serve = require('./index')
 
