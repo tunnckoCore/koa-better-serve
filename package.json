@@ -9,6 +9,8 @@
   "main": "./index.js",
   "license": "MIT",
   "scripts": {
+    "fresh": "hela fresh",
+    "contrib": "hela contrib",
     "renovate": "hela renovate",
     "lint": "hela lint -c .eslintrc.json",
     "test": "hela test node test.js",
@@ -56,13 +58,6 @@
     "static",
     "upload"
   ],
-  "nyc": {
-    "check-coverage": true,
-    "statements": 100,
-    "functions": 100,
-    "branches": 100,
-    "lines": 100
-  },
   "verb": {
     "run": true,
     "toc": {

@@ -9,15 +9,12 @@
     "renovate"
   ],
   "prCreation": "not-pending",
-  "schedule": [
-    "every 15 mins every weekday"
-  ],
   "depTypes": [
     {
       "depType": "dependencies",
       "semanticPrefix": "fix(deps): ",
       "automerge": "minor",
-      "automergeType": "pr",
+      "automergeType": "branch-push",
       "assignees": [
         "charlike"
       ]
