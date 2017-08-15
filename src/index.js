@@ -5,8 +5,8 @@
  * Released under the MIT license.
  */
 
-const send = require('koa-send')
-const kindOf = require('kind-of')
+import send from 'koa-send'
+import kindOf from 'kind-of'
 
 /**
  * Serving `dir` of files and folders, when request
@@ -28,7 +28,7 @@ const kindOf = require('kind-of')
  * @return {Function} a [koa][] plugin which returns `Promise` when called
  * @public
  */
-module.exports = function koaBetterServe (root, pathname, options) {
+export default function koaBetterServe (root, pathname, options) {
   if (kindOf(root) !== 'string') {
     throw new TypeError('koa-better-serve: expect `root` to be string')
   }

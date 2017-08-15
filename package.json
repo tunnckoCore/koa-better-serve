@@ -6,14 +6,17 @@
   "homepage": "https://github.com/tunnckoCore/koa-better-serve",
   "author": "Charlike Mike Reagent <@tunnckoCore> (https://i.am.charlike.online)",
   "nspId": "1efca2b5-9131-4e4e-9081-b911c996598e",
-  "main": "./index.js",
+  "module": "./dest/index.mjs",
+  "main": "./dest/index.js",
   "license": "MIT",
   "scripts": {
     "fresh": "hela fresh",
     "contrib": "hela contrib",
     "renovate": "hela renovate",
     "lint": "hela lint -c .eslintrc.json",
+    "pretest": "hela build && hela pretest",
     "test": "hela test node test.js",
+    "posttest": "hela posttest",
     "precommit": "hela precommit",
     "commit": "hela commit",
     "postcommit": "git push",
@@ -25,7 +28,7 @@
     "npm": ">=5"
   },
   "files": [
-    "index.js"
+    "dest/"
   ],
   "dependencies": {
     "kind-of": "5.0.2",

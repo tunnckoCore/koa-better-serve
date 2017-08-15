@@ -5,12 +5,15 @@
  * Released under the MIT license.
  */
 
-const Koa = require('koa')
+const path = require('path')
 const test = require('mukla') // eslint-disable-line
+const Koa = require('koa')
 const request = require('supertest')
-const serve = require('./index')
+const serve = require('./src/index')
 
-test('throw error if `root` not a string', () => {
+const relative = (fp) => path.join(__dirname, fp)
+
+test('1. throw error if `root` not a string', () => {
   function fixture () {
     serve(123)
   }
@@ -19,7 +22,7 @@ test('throw error if `root` not a string', () => {
   test.throws(fixture, /expect `root` to be string/)
 })
 
-test('throw error if `pathname` not a string or `options` object', () => {
+test('2. throw error if `pathname` not a string or `options` object', () => {
   function fixture () {
     serve('./foo', 123)
   }
@@ -28,10 +31,10 @@ test('throw error if `pathname` not a string or `options` object', () => {
   test.throws(fixture, /expect `pathname` to be string/)
 })
 
-test('accept `options` as second parameter', () => {
+test('3. accept `options` as second parameter', () => {
   let app = new Koa()
   app.use(
-    serve('./', {
+    serve(__dirname, {
       hidden: true,
     })
   )
@@ -42,26 +45,26 @@ test('accept `options` as second parameter', () => {
     .expect(200)
 })
 
-test('response 404 when `root` not exists', () => {
+test('4. response 404 when `root` not exists', () => {
   let app = new Koa()
   app.use(serve('./not-exists', '/'))
 
   return request(app.callback()).get('/LICENSE').expect(404, /Not Found/)
 })
 
-test('serve file from root when pathname `/pkg/`', () => {
+test('5. serve file from root when pathname `/pkg/`', () => {
   let server = new Koa()
 
   // both `/pkg/` and `pkg/` works
-  return request(server.use(serve('./', 'pkg/')).callback())
+  return request(server.use(serve(__dirname, 'pkg/')).callback())
     .get('/pkg/package.json')
     .expect(/name": "koa-better-serve"/)
     .expect(200)
 })
 
-test('serve package.json from nested root', () => {
+test('6. serve package.json from nested root', () => {
   let app = new Koa()
-  app.use(serve('./node_modules/koa-send'))
+  app.use(serve(relative('node_modules/koa-send')))
 
   return request(app.callback())
     .get('/package.json')
@@ -69,9 +72,9 @@ test('serve package.json from nested root', () => {
     .expect(200)
 })
 
-test('serve file when request has prefix', () => {
+test('7. serve file when request has prefix', () => {
   let app = new Koa()
-  app.use(serve('./node_modules/supertest', '/some/foo/bar'))
+  app.use(serve(relative('node_modules/supertest'), '/some/foo/bar'))
 
   return request(app.callback())
     .get('/some/foo/bar/package.json')
