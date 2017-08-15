@@ -26,6 +26,7 @@ import kindOf from 'kind-of'
  * @param  {String|RegExp} pathname path to match, can be regex
  * @param  {Object} options optional, passed directly to [koa-send][]
  * @return {Function} a [koa][] plugin which returns `Promise` when called
+ * @name   koaBetterServe
  * @public
  */
 export default function koaBetterServe (root, pathname, options) {
