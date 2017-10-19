@@ -31,7 +31,7 @@
     "dest/"
   ],
   "dependencies": {
-    "kind-of": "5.0.2",
+    "kind-of": "5.1.0",
     "koa-send": "4.1.1"
   },
   "devDependencies": {
