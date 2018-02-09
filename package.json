@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "kind-of": "5.1.0",
-    "koa-send": "4.1.1"
+    "koa-send": "4.1.2"
   },
   "devDependencies": {
     "chokidar-cli": "1.2.0",
