@@ -39,7 +39,7 @@
     "eslint": "6.5.1",
     "eslint-config-standard-tunnckocore": "1.0.10",
     "hela": "2.0.10",
-    "husky": "3.0.7",
+    "husky": "3.0.8",
     "koa": "2.8.2",
     "semantic-release": "^7.0.0",
     "supertest": "4.0.2"
