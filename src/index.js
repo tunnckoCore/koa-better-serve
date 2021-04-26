@@ -48,6 +48,12 @@ export default function koaBetterServe (root, pathname, options) {
   }
 
   return (ctx, next) => {
+    if (ctx.path.indexOf(pathname) < 0) {
+      // if route not match, goto next middleware
+      // so this middleware can be initialized at any time instead of at the last.
+      next();
+      return;
+    }
     const filepath = ctx.path.replace(pathname, '')
 
     return send(ctx, filepath, options).catch((er) => {
